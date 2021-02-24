@@ -53,5 +53,28 @@ READ THIS:
 * It only takes the input in and returns output
 * Apart from the input id does not touch any data
 
-Example of Input-Output
+Example of Pure function
 ![](images/img-1.PNG)
+
+The above diagram shows:
+* Pure function is like a black box
+* Green circle goes in as input and gets converted to triangle
+
+While working, we have some pressure to complete the work done or just complete the coding exercises and what it makes the function do is it takes the input, it does give us the desireable output but it also communicates with the outside world.
+
+Example of Impure function
+![](images/img-2.PNG)
+
+So it also might be reading things from outside world to make its computation a lot more easier. Like what time is it or what profile picture does this user have. Things that **aren't direct input to the function** but **it uses them for their computational purposes**. 
+
+It may also be considered as impure if the function might **change a value other than input and outside it's scope.** OR **call other function**.
+
+That communication with outside world is called **side-effects**. That is what is not allowed in a pure-function.
+![](images/img-3.PNG)
+
+So in a pure function is a function that does not have any side-effects. All it needs is an input and all it does is return its output value.
+
+## Tradeoffs
+Each paradigm has tradeoffs. Mostly complex program to be broken to smaller entities.
+As developer, learn as many paradigms as possible and to think them as tools in our mental toolbox and we can effortlessly switch to.
+
