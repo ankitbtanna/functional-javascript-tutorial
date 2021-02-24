@@ -54,4 +54,4 @@ READ THIS:
 * Apart from the input id does not touch any data
 
 Example of Input-Output
-(./images/img-1.PNG)
+(https://raw.githubusercontent.com/ankitbtanna/functional-javascript-tutorial/main/images/img-1.PNG)
