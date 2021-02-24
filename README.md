@@ -45,7 +45,7 @@ Think of the race. Break code into functions. Make those functions functional. T
 Think of the bands. Turn a sequence of operations into a pipeline.
 
 READ THIS:
-[Introduction to FP by Mary Rose Cook](https://codewords.recurse.com/issues/one/an-introduction-to-functional-programming,'Introduction to FP by Mary Rose Cook')
+[Introduction to FP by Mary Rose Cook](https://codewords.recurse.com/issues/one/an-introduction-to-functional-programming "Introduction to FP by Mary Rose Cook")
 
 ## Pure Functions
 ### only input in ---> only output out
@@ -54,4 +54,4 @@ READ THIS:
 * Apart from the input id does not touch any data
 
 Example of Input-Output
-(https://raw.githubusercontent.com/ankitbtanna/functional-javascript-tutorial/main/images/img-1.PNG)
+![alt text](https://raw.githubusercontent.com/ankitbtanna/functional-javascript-tutorial/main/images/img-1.PNG "Pure functions example")
