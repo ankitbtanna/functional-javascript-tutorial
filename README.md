@@ -78,3 +78,27 @@ So in a pure function is a function that does not have any side-effects. All it 
 Each paradigm has tradeoffs. Mostly complex program to be broken to smaller entities.
 As developer, learn as many paradigms as possible and to think them as tools in our mental toolbox and we can effortlessly switch to.
 
+## Pure functions vs Impure functions
+
+**Impure Function:**
+```javascript
+let author = "Alonzo";
+
+function greet() {
+    console.log(`Hello, ${author}!`);
+}
+
+greet();
+author = "Alan";
+greet();
+```
+
+**Pure Function:**
+```javascript
+function greet(author) {
+  console.log(`Hello, ${author}!`);
+}
+
+greet("Alonzo");
+greet("Alan");
+```
