@@ -164,6 +164,152 @@ greet("Howdy", "Alan");
 * A tiny program with greeting and name input
 * what are its output - greeting and name
 * Great for data transformations
-* DO NOTHING but RETURN OUTPUT based on ONLY INPUT
 
-## Side effects
+## What are Side-Effects?
+* Avoid Side-effects - DO NOTHING but RETURN OUTPUT based on ONLY INPUT
+
+### Side-effects
+```javascript
+let thesis = { name: "Church", date: 1936 };
+
+function renameThesis(newName) {
+    thesis.name = newName;
+    console.log("Renamed");
+}
+
+renameThesis('Church-Turing');
+thesis;
+```
+
+### Above code has side-effects
+* Assigning a new value to thesis.name property. This function is affecting it.
+* By reading data from the outside world - thesis object
+* Logging to console
+
+### No Side-effects
+```javascript
+const thesis = { name: "Church", date: 1936 };
+
+function renameThesis(oldThesis, newName) {
+    return { name: newName, date: oldThesis.date };
+}
+
+const thesis2 = renameThesis(thesis, 'Church-Turing');
+thesis;
+thesis2;
+```
+
+### Above code has no side-effects
+* What this function does is takes in old thesis object and returns a new object. Creating a new object.
+* We will use it a lot when we come to **immutable data**. We dont want to update the things in-place, we want to take things and make a new copy(different)
+* Pure function may need a lot of arguments. 
+
+**Arity:** Number of arguments a function can take. Single argument function is called unary, 2 argument binary function.
+
+* there is a slight trick here to check purity and impurity of this function... pass by reference. **hint - spread syntax
+
+## Exercise - Pure functions
+* look at which functions are pure and which are not and why
+* Remember: A pure function has 2 characteristics
+**No Side-effects:** A pure function has no effect on the program or the world
+**Deterministic:** Given the same input values, a pure function will always return the same output. This is because its return value depends only on its input parameters and not on any other information. (e.g. Global program state)
+
+```javascript
+/* Example 1 */
+function getDate() {
+  return new Date().toDateString();
+}
+// Impure
+// A function is not pure if its output depends on anything except its inputs (including the state of the world), or if calling the function at different times with the same inputs can give different outputs (e.g. if called on different days).
+
+/* Example 2 */
+function getWorkshopDate() {
+  return new Date(2020, 11, 4).toDateString();
+}
+// Pure
+// A function is pure if its output depends on nothing but its inputs, and it always returns the same output if called with the same inputs (in this case, no inputs).
+
+/* Example 3 */
+function toHex(n) {
+  let hex = n.toString(16);
+  return hex.padStart(2, "0");
+}
+// Pure
+// A function is pure if its output depends on nothing but its inputs, it does nothing except return its output, and it always returns the same output if called with the same input.
+
+/* Example 4 */
+function rgbToHex(R, G, B) {
+  return '#' + [toHex(R), toHex(G), toHex(B)].join('');
+}
+// Pure
+// A function is pure if its output depends on nothing but its inputs, it does nothing except return its output, and it always returns the same output if called with the same input.
+
+/* Example 5 */
+function setColor(R, G, B) {
+  const hex = rgbToHex(R, G, B);
+  const colorMe = document.getElementById("color-me");
+  colorMe.setAttribute("style", "color: " + hex);
+}
+// Impure
+// A function is not pure if it does anything besides return its output. Any other effect it has on the program or world is a side effect (in this case, changing the properties of an HTML element on the page).
+
+/* Example 6 */
+async function readJsonFile(filename) {
+  const file = await fetch(
+    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+  );
+  return await file.json();
+}
+// Impure
+// A function is not pure if its output depends on the state of the world (in this case, the contents of web-hosted file), or if calling the function at different times with the same inputs can give different outputs.
+
+/* Example 7 */
+function writeJsonString(object) {
+  return JSON.stringify(object, null, 2);
+}
+// Pure
+// A function is pure if its output depends on nothing but its inputs, and it always returns the same output if called with the same input. In this case, calling it on the same object will always return the same string.
+
+/* Example 8 */
+function exclusiveOr(A, B) {
+  return (A || B) && !(A && B);
+}
+// Pure
+// A function is pure if its output depends on nothing but its inputs, it does nothing except return its output, and it always returns the same output if called with the same input.
+
+/* Example 9 */
+function computeTruthTable(operator) {
+  const truthValues = [true, false];
+  const table = [];
+  for (const A of truthValues) {
+    for (const B of truthValues) {
+      const value = operator(A, B);
+      table.push({ A, B, value });
+    }
+  }
+  return table;
+}
+// Pure
+// A function is pure if its output depends on nothing but its inputs, it does nothing except return its output, and it always returns the same output if called with the same input.
+
+/* Example 10 */
+function showTruthTable(operator) {
+  console.table(computeTruthTable(operator));
+}
+// Impure
+// A function is not pure if it does anything besides return its output. Any other effect it has on the program or world is a side effect (in this case, logging information to the console).
+```
+
+## Learnings from Exercise:
+* 1 - Impure, Returns different output every time. Date is part of the outside world. When we call it at a different day we get different date. It is not deterministic.
+* 2 - Pure, Same output every time. It is deterministic.
+* 3 - Pure, function which essentialy depend only on input. We are using string methods which return the same output always
+* 4 - Pure
+* 5 - Impure - Not returning anything. Accessing the DOM
+* 6 - Impure - Not using input. Fetching data from outside url. Not deterministic.
+* 7 - Pure - Same input, same output * if the object is changing externally
+* 8 - Pure
+* 9 - Pure - * operator could be a function, mutating table inside the function
+* 10 - Impure - console.table, no return statement
+
+**Randomness** is a side-effect.
