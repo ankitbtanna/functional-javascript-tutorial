@@ -133,3 +133,37 @@ If a function does not take any input, its a yellow flag. Not returning a flag i
     - Do everything with functions
     - Ask: What should my function take in and what should it give it as output? instead of how should my program run
 
+## Imperative vs Functional
+
+**Imperative code**
+```javascript
+let name = "Alonzo";
+let greeting = "Hi";
+
+console.log(`${greeting}, ${name}!`);
+
+greeting = "Howdy";
+
+console.log(`${greeting}, ${name}!`);
+```
+
+**Functional code**
+```javascript
+function greet(greeting, name) {
+  console.log(`${greeting}, ${name}!`);
+}
+
+greet("Hello", "Alonzo");
+greet("Howdy", "Alan");
+```
+### Imperative
+* Series of commands
+* what are the inputs? what are the outputs?
+
+### Functional
+* A tiny program with greeting and name input
+* what are its output - greeting and name
+* Great for data transformations
+* DO NOTHING but RETURN OUTPUT based on ONLY INPUT
+
+## Side effects
