@@ -102,3 +102,11 @@ function greet(author) {
 greet("Alonzo");
 greet("Alan");
 ```
+
+Functional programming must help us write more re-usable code.
+### Differences
+* In the impure function, Unexpected output if the variable changes at a point of time when the function is called. Output changes depending on external circumstances. VS in Pure function I get the same output for the same input always.
+A pure function, every time we call it with same argument we get the same result -- guaranteed. Because, output of the function does not depend upon the outside world. It depends upon the arguments that are passed in. It is deterministic based on input.
+* Anything that is going inside the program, all the computed things are much predictable inside pure function.
+
+If a function does not take any input, its a yellow flag. Not returning a flag is a huge red flag.
