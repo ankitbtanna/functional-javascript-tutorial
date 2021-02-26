@@ -110,3 +110,26 @@ A pure function, every time we call it with same argument we get the same result
 * Anything that is going inside the program, all the computed things are much predictable inside pure function.
 
 If a function does not take any input, its a yellow flag. Not returning a flag is a huge red flag.
+
+## Why functional programming?
+* Why would be bother about all this?
+* When functions are deterministic, when we know exactly what output we are going to get on what input, we are going to become much more predictable. The code will be much more safer.
+* Less opportunity for bugs to arise.
+* Easier to test and debug AND maintain the code.
+    - no need to setup the component, mocks
+* Isolated, pure, deterministic units
+* Should not use FP because it makes us look smart with fancy terminology...
+* Why use JavaScript?
+    - OOJS is hard
+    - prototype, this
+    - Very hard to remember
+    - This got removed when we started programming functionally
+* Established community and tools
+    - Courses, libs, frameworks, resources
+    - dont require you to learn new syntax
+    - huge community
+* How do be go about functional programming?
+    - Write pure functions <-- Mantra
+    - Do everything with functions
+    - Ask: What should my function take in and what should it give it as output? instead of how should my program run
+
