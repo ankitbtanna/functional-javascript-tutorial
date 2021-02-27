@@ -313,3 +313,65 @@ function showTruthTable(operator) {
 * 10 - Impure - console.table, no return statement
 
 **Randomness** is a side-effect.
+
+## Recursion
+Another technique in FP toolbox.
+How it helps us **avoid more imperative style of looping** (for, forEach) through iteration.
+* Iteration and Recursion - we could think of as two mini paradigmns that go hand in hand for imperative programming for iteration and functional programming for recursion
+* Recursion - to do same operation lots of different times, Iteration - repetition is loops (for, while)
+* Iteration is stateful, maintains state of which loop we are in
+* Recursion is stateless and function and self referential. A function calling itself inside. 
+* Difference between Iteration and Recursion
+![](images/img-6.PNG)
+
+* Iteration isnt functional. Use recursion instead.
+* When writing FP, we will move away from iteration and move towards more of a recursive mindset
+
+### Example of iteration
+```javascript
+function sum(numbers) {
+    let total = 0;
+    for (i = 0; i < numbers.length; i++) {
+        total += numbers[i];
+    }
+    return total;
+}
+sum([0, 1, 2, 3, 4]);
+```
+* Above is example of iterative code
+* I have got a **sum** function which takes in **numbers** array as an argument
+* Uses a var total with a for loop which changes the value of total each time the value changes
+* Returns total
+* Is this pure? - YES*. * - changing of total variable through the time inside this code is not super functional.
+
+### Example of recursion
+```javascript
+function sum(numbers) {
+    if (numbers.length === 0) {
+        // non-recursive case
+        return 0;
+    } else if (numbers.length === 1) {
+        // non-recursive case
+        return numbers[0];
+    } else {
+        // recursive case
+        return numbers[0] + sum(numbers.slice(1));
+    }
+}
+
+sum([0, 1, 2, 3, 4]);
+```
+* Recursive functions have 2 main parts
+    - A recursive case
+    - A non-recursive case
+* If we dont have a non-recursive case, our program will go into an infinite loop
+* You can have more than one non-recursive cases
+* Dont forget the base case else we will have infinite loop
+* Are recursive functions more expensive?
+
+In functional programming, we avoid mutable state, and therefore avoid iterative loops using for or while. As an alternative to iteration, we use recursion to break down the problem into smaller ones.
+
+A recursive function has two parts:
+
+Base case: condition(s) under which the function returns an output without making a recursive call
+Recursive case: condition(s) under which the function calls itself to return the output
