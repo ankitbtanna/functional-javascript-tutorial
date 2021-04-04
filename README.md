@@ -545,3 +545,68 @@ function length(array) {
 }
 ```
 
+## Closures
+* Take away of the idea is important
+* Function can define functions i.e. return inner functions and remember scope
+* Inner function has access to outer function scope
+* If a function is defined which returns inner function, the inner function can remember the scope of outer function even if its not passed
+* In functional programming we say we dont work with state, in closure there is a small loop hole
+
+```javascript
+function makeAdjectifier(adjective) {
+    return function (noun) {
+        return adjective + " " + noun;
+    }
+}
+
+const coolify = makeAdjectifier("cool");
+coolify("workshop");
+coolify("drink");
+```
+
+### Partial Application
+* Lets us take us function and lock in some arguments
+* Make some more reusable functions
+
+### Currying
+* Takes a multi-argument function and breaks up into a series of single argument functions which successively remembers outer scopes
+
+```javascript
+function greet(greeting, name) {
+    return `${greeting}, ${name}`;
+}
+
+function curryGreet(greeting) {
+    return function (name) {
+        return `${greeting}, ${name}`;
+    }
+}
+
+const greetItalian = curryGreet('Ciao');
+greetItalian('Alonzo');
+
+const greetSpanish = curryGreet("Hola");
+greetSpanish("Alonzo");
+```
+
+* Allow us to make more modular functions
+
+### Examples of Closure and Currying
+```javascript
+function writeMessage(message, salutation, name) {
+  return md`<p style="padding:3em;font-family:monospace">${message}<br><br>${salutation},<br>${name}</p>`;
+}
+
+function signMessageFrom(name) {
+  return (message, salutation) => writeMessage(message, salutation, name);
+}
+
+const writeFriendlyNote = signMessageFrom("Your best bud");
+const writeBusinessMemo = signMessageWith("Best");
+
+const curriedQuote = (name) => (year) => (text) => quote(name, year, text);
+
+function quote(name, year, text) {
+  return md`<p style="font-size:smaller;padding:1em;font-family:monospace;">"${text}"<br>- ${name} (${year})</p>`;
+}
+```
