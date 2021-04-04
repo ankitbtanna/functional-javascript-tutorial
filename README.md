@@ -460,3 +460,88 @@ recursiveFibonacci(19);
 * Tail Call Optimization: JS engine feature
     - Perform an optimization on my recursion
     - Write it in a different way
+
+## Higher-Order Functions
+* Techniques in toolbox
+* Higher-order functions, first class functions
+* First-class Functions: A language has first-class functions when language supports passing functions around as a parameter. e.g. callback
+* Higher-Order Functions: Takes in another function/s as input or returns function
+* Key technique in functional programming
+* Functions can give and take functions
+* Dont Loop: use higher-order functions like map, reduce, filter
+    - Apply function on iterable element like array/object
+    - Processing those arrays with functions rather than loops
+* Filter: a predicate function
+* Map: an operation function
+* Reduce: a combining function
+
+![](images/img-7.PNG)
+
+### Filter
+The filter function takes a "predicate" function (a function that takes in a value and returns a boolean) and an array, applies the predicate function to each value in the array, and returns a new array with only those values for which the predicate function returns true.
+
+```javascript
+var wholes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+function filter(predicateFn, array) {
+    if (length(array) === 0) return [];
+    const firstItem = head(array);
+    const filteredFirst = predicateFn(firstItem) ? [firstItem] : [];
+    return concat(filteredFirst, filter(isEven, tail(array)));
+}
+
+filter(isEven, wholes);
+
+function map(operationalFn, array) {
+  if (length(array) === 0) return [];
+  const firstItem = head(array);
+  const doubledFirst = [operationalFn(firstItem)];
+  return concat(doubledFirst, map(doubled, tail(array)));
+}
+
+map(doubled, wholes);
+
+function reduce(reducerFn, initialValue, array) {
+  if (length(array) === 0) return initialValue;
+  const newInitialValue = reduceFn(initialValue, head(array));
+  return reduce(reducerFn, newInitialValue, tail(array))
+}
+
+reduce(sum, 0, wholes);
+
+// a predicate function for filter
+function isEven(n) {
+    return n % 2 === 0;
+}
+
+// a operational function for map
+function doubled(n) {
+  return n*2;
+}
+
+// a reducer function
+function sum(a, b) {
+  return a+b;
+}
+
+// Return the first item in an array
+function head(array) {
+  return array[0];
+}
+
+// Return the rest of an array after the first item
+function tail(array) {
+  return array.slice(1);
+}
+
+// Concatenate two arrays into a new single array
+function concat(array1, array2) {
+  return array1.concat(array2);
+}
+
+// Return the number of items in an array
+function length(array) {
+  return array.length;
+}
+```
+
