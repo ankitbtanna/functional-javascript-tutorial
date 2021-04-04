@@ -610,3 +610,63 @@ function quote(name, year, text) {
   return md`<p style="font-size:smaller;padding:1em;font-family:monospace;">"${text}"<br>- ${name} (${year})</p>`;
 }
 ```
+
+## Function Composition
+* Know how functional programmers use functional composition to create complete program
+* One functions output --> input to other function
+* Program = functions composed of smaller functions
+* Everything needs to be a pure function (input giving output)
+* Think about how the data is going to flow through different functions
+* Typically many dont use such stuff
+
+![](images/img-8.PNG)
+
+* Flow the data through the series of functions to get the output what I want
+
+![](images/img-9.PNG)
+
+```javascript
+var ender = (ending) => (input) => input + ending;
+
+var adore = ender(' rocks');
+var announce = ender(", y'all");
+var exclaim = ender("!");
+
+var hypeUp = (x) => exclaim(announce(adore(x)));
+hypeUp('JS'); // JS rocks, y'all!
+```
+
+* hypeUp is now a program
+* Breaking down in multi argument functions into smaller argument functions helps us
+
+## Immutability
+* Avoid mutability for happier programming
+* dont change in-place, replace/make a new copy
+* how to use the map function to copy an array to prevent mutation. Although the new copy has prevented mutating the original Array, creating copies can increase the amount of memory required to run a program. Immutable or persistent data structures allow unchanged parts of the data to be reused throughout a program.
+* Can use map to create a new copy of array
+
+```javascript
+const oldCities = ["Delhi", "Bombay", "Bangalore"];
+
+const newCities = oldCities.map((city) => {
+    if (city === "Bombay") return "Mumbai";
+    if (city === "Bangalore") return "Bengaluru";
+    return city;
+})
+
+oldCities; // ["Delhi", "Bombay", "Bangalore"]
+newCities; // ["Delhi", "Mumbai", "Bengaluru"]
+```
+
+* not very efficient
+* takes memory and time
+* immutability = time+memory
+* Data Structures designed to be immutable and efficient
+* Immutable Data Structures --> Structural Sharing
+    - Reuse unchanged part of the tree
+
+
+## Next Steps
+Read below:
+https://observablehq.com/@anjana/next-steps
+
