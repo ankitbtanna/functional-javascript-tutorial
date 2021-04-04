@@ -375,3 +375,88 @@ A recursive function has two parts:
 
 Base case: condition(s) under which the function returns an output without making a recursive call
 Recursive case: condition(s) under which the function calls itself to return the output
+
+## Recursion Exercise
+* Keep in mind what we know about recursion.
+* Compare iteration and recursion
+
+### Readability
+* In the below two examples, we have iterative factorial function and recursive factorial function.
+* Compare the readability of both the functions. Which one is simpler to understand?
+
+**Iterative Factorial**
+```javascript
+function iterativeFactorial(n) {
+  let product = 1;
+  while (n > 0) {
+    product *= n;
+    n--;
+  }
+  return product;
+}
+```
+
+**Recursive Factorial**
+```javascript
+function recursiveFactorial(n) {
+    if (n === 0) return 1;
+    return n * recursiveFactorial(n - 1);
+}
+
+recursiveFactorial(10);
+```
+
+**Fibonacci**
+Now it's time to try writing our own iterative & recursive functions!
+
+In the cells below, fill in the code to implement iterative and recursive versions of a function to compute the Nth Fibonacci number given a positive integer n.
+
+Each Fibonacci number is defined as the sum of the previous two Fibonacci numbers, so fibonacci(n) = fibonacci(n-1) + fibonacci(n-2). By convention, the first two numbers are fixed: fibonacci(0) = 0 and fibonacci(1) = 1.
+
+**Iterative Fibonacci**
+```javascript
+function iterativeFibonacci(n) {
+    let fibArr = [0, 1];
+    for (let i = 2; i < n + 1; i++) {
+        fibArr.push(fibArr[i - 2] + fibArr[i - 1]);
+    }
+    return fibArr[n];
+}
+
+iterativeFibonacci(20);
+```
+
+```javascript
+function recursiveFibonacci(n) {
+    if (n < 2) return n;
+    return recursiveFibonacci(n - 1) + recursiveFibonacci(n - 2);
+}
+
+recursiveFibonacci(19);
+```
+
+### Readability
+* Based on programmer
+* Iterative one is very clear. Step by step
+* Recursive functions are more elegant
+    - It doesnt need to keep the state
+    - Way more easier to reason about
+* Might be a little harder - Subjective
+* Working with imperative program is always easier
+* Practice, wrap your head around functional approach. Concept of solving a problem will help understand recursive code
+* Less code to worry about
+
+### Performance
+* What are the performance consideration?
+* Chrome crashes
+* Iterative Faster than Recursive
+* Why?
+    - Recursive makes multiple calls with same argument
+    - Call stack becomes huge
+    - Too much recursion - Internal error
+* Solution: memoization
+    - Caching the results of these function
+    - Dont have to repeat the computation
+* Tail Call Optimization: JS engine feature
+    - Perform an optimization on my recursion
+    - Write it in a different way
